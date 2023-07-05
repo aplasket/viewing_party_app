@@ -49,6 +49,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem "faraday"
+gem "figaro"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -77,4 +78,6 @@ group :test do
   gem "simplecov"
   gem "capybara"
   gem "orderly"
+  gem "webmock"
+  gem "vcr"
 end
