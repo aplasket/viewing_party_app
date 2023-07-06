@@ -13,3 +13,21 @@
  *= require_tree .
  *= require_self
  */
+/* app/assets/stylesheets/application.css */
+.alert {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+
+.alert-success {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #3c763d;
+}
+
+.alert-error {
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  color: #a94442;
+}

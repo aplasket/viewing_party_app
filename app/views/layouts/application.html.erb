@@ -11,7 +11,14 @@
   </head>
 
   <body>
+    <div class="container">
+        <% flash.each do |type, notice| %>
+          <h5 class="text-info"><b><%= notice %></b></h5>
+        <% end %>
+    </div>
+
     <%= link_to "Home", root_path %>
+    <h1>Viewing Party</h1>
     <%= yield %>
   </body>
 </html>
