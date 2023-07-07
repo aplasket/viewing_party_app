@@ -12,7 +12,8 @@ class MoviesController < ApplicationController
     end
 
     json = JSON.parse(response.body, symbolize_names: true)
-    @movies = json[:results].slice(0,20)
+    @movies = json[:results].slice(0,20).map {|movie_data| Movie.new(movie_data)} 
+    # require 'pry'; binding.pry
   end
   
   def show; end
