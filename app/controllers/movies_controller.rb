@@ -12,7 +12,7 @@ class MoviesController < ApplicationController
     end
 
     json = JSON.parse(response.body, symbolize_names: true)
-    @movies = json[:results]
+    @movies = json[:results].slice(0,20)
   end
   
   def show; end
