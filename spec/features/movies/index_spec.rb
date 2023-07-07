@@ -52,13 +52,13 @@ RSpec.describe "/users/:user_id/movies?, Movies Results", type: :feature do
       visit user_discover_index_path(user1)
       
       within(".search-movies") do
-        fill_in(:q, with: "Indiana Jones and the Dial of Destiny")
+        fill_in(:q, with: @movie_data[:title])
         click_button "Find Movies"
       end
       
       within(".results") do 
-        expect(page).to have_link("Indiana Jones and the Dial of Destiny")
-        click_link "Indiana Jones and the Dial of Destiny"
+        expect(page).to have_link(@movie_data[:title])
+        click_link @movie_data[:title]
       end
 
       expect(current_path).to eq(user_movie_path(user1, @movie_data[:id] ))
@@ -68,7 +68,7 @@ RSpec.describe "/users/:user_id/movies?, Movies Results", type: :feature do
       visit user_discover_index_path(user2)
 
       within(".search-movies") do
-        fill_in(:q, with: "Indiana Jones and the Dial of Destiny")
+        fill_in(:q, with: @movie_data[:title])
         click_button "Find Movies"
       end
 
