@@ -6,13 +6,13 @@ class MoviesController < ApplicationController
       faraday.params["api_key"] = ENV["TMDB_API_KEY"]
     end
     if @keyword == "top%20rated"
-      response = conn.get("https://api.themoviedb.org/3/movie/top_rated")
+      response = conn.get("/3/movie/top_rated")
     else
-      response = conn.get("https://api.themoviedb.org/3/search/movie?query=#{@keyword}")
+      response = conn.get("/3/search/movie?query=#{@keyword}")
     end
 
     json = JSON.parse(response.body, symbolize_names: true)
-    @movies = json[:results].slice(0,20).map {|movie_data| Movie.new(movie_data)} 
+    @movies = json[:results].map {|movie_data| Movie.new(movie_data)} 
     # require 'pry'; binding.pry
   end
   

@@ -1,10 +1,10 @@
 <%= button_to "Discover Page", user_discover_index_path(@user), method: :get %><br>
 
+<div class="results">
 <% if @keyword != "top%20rated" %>
     <p> Movie results for: <%= "#{@keyword}" %></p>
 <% end %>
 
-<div class="results">
     <% @movies.each do |movie| %>
         <%= link_to "#{movie.title}", user_movie_path(@user, movie.movie_id) %>
         Vote Average: <%= "#{movie.vote_average.round(1)}" %>

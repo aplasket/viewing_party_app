@@ -57,6 +57,7 @@ RSpec.describe "/users/:user_id/movies?, Movies Results", type: :feature do
       end
       
       within(".results") do 
+        expect(page).to have_content("Movie results for: #{@movie_data[:title]}")
         expect(page).to have_link(@movie_data[:title])
         click_link @movie_data[:title]
       end
