@@ -1,29 +1,48 @@
 class MovieFacade
-  attr_reader :keyword
+  attr_reader :keyword,
+              :user_id
 
-  def initialize(keyword = nil)
-    @keyword = keyword
+  def initialize(params)
+    @keyword = params[:keyword]
+    @user_id = params[:user_id]
+    @movie_id = params[:id]
   end
 
-  def find_movies
-    service = MovieService.new
+  def title_statement
+    if @keyword
+      "Movie results for: #{@keyword}"
+    else
+      "Top Movies"
+    end
+  end
 
-    json = @keyword.nil? ? service.find_top_movies : service.search_movies_by_keyword(@keyword)
+  def movies
+    if @keyword
+      make_movies(service.search_movies_by_keyword(@keyword))
+    else
+      make_movies(service.find_top_movies)
+    end
+  end
 
-    @movies = json[:results].map do |movie_data|
+  def make_movies(json)
+    json[:results].map do |movie_data|
       Movie.new(movie_data)
     end
   end
 
-  def show_movie_details
-    service = MovieService.new
-    movie_data = service.movie_details(@keyword)
-    @movie = Movie.new(movie_data)
+  def service
+    MovieService.new
   end
 
-  def self.get_movie(id)
-    service = MovieService.new
-    movie_data = service.movie_details(id)
-    Movie.new(movie_data)
+  def movie
+    Movie.new(service.movie_details(@movie_id))
+  end
+
+  def credits
+    Credit.new(service.movie_credits(@movie_id))
+  end
+
+  def reviews
+    Review.new(service.movie_reviews(@movie_id))
   end
 end

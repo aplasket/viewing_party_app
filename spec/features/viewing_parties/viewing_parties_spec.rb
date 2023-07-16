@@ -5,7 +5,7 @@ RSpec.describe "/users/:user_id/movies/:movie_id/viewing-party/new" do
     @user = User.create!(name: "Silly Billy", email: "silly_billy@email.com")
     @user2 = User.create!(name: "Michael", email: "michael@email.com")
     @user3 = User.create!(name: "Tula", email: "tula@email.com")
-    @movie = MovieFacade.get_movie(238)
+    @movie = MovieFacade.new({id: 238}).movie
 
     visit new_user_movie_viewing_party_path(@user, @movie.id)
   end

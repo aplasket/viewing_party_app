@@ -5,9 +5,11 @@ RSpec.describe "user_path(user)", type: :feature do
     let(:user) { create(:user) }
     let(:user2) { create(:user) }
 
-    before(:each) do 
-      @party1 = Party.create!(duration: 100, party_date: "08/02/23" , party_time: "12:00", movie_id: 500)
-      @party2 = Party.create!(duration: 120, party_date: "08/03/23", party_time: "8:00", movie_id: 400)
+    before(:each) do
+      @movie1 = MovieFacade.new({id: 500}).movie
+      @movie2 = MovieFacade.new({id: 400}).movie
+      @party1 = Party.create!(duration: 100, party_date: "08/02/23" , party_time: "12:00", movie_id: @movie1.id)
+      @party2 = Party.create!(duration: 120, party_date: "08/03/23", party_time: "8:00", movie_id: @movie2.id)
       @u1p1 = UserParty.create!(user_id: user.id, party_id: @party1.id, is_host: true)
       @u2p1 = UserParty.create!(user_id: user2.id, party_id: @party1.id, is_host: false)
     end
@@ -25,27 +27,23 @@ RSpec.describe "user_path(user)", type: :feature do
       expect(current_path).to eq(user_discover_index_path(user))
     end
 
-    xit "should render the parties the user is invited to", :vcr do 
-      visit user_path(user)
+    it "should render the parties the user is invited to", :vcr do
+      visit user_path(user2)
       # require 'pry'; binding.pry
       within ".invited_to_parties" do
-        expect(page).to have_content("Reservoir Dogs")
-        expect(page).to have_content(@party1.party_date)
-        expect(page).to have_content(@party1.party_time)
+        expect(page).to have_content(@movie1.title) #Reservoir Dogs
+        expect(page).to have_content(@party1.party_date.strftime("%B %d, %Y"))
+        expect(page).to have_content(@party1.party_time.strftime("%I:%M%p"))
         expect(page).to have_content("Invited")
-        expect(page).to have_content("Hosted by: #{@user_1.name}")
-        expect(page).to have_content("#{@user_2.name}")
       end
 
-      # within ".hosting_parties" do
-      #   expect(page).to have_content("Things to Do in Denver When You're Dead")
-      #   expect(page).to have_content(@party2.party_date)
-      #   expect(page).to have_content(@party2.party_time)
-      #   require 'pry'; binding.pry
-      #   expect(page).to have_content("Invited")
-      #   expect(page).to have_content("Hosted by: #{@user_2.name}")
-      #   expect(page).to have_content("#{@user_2.name}")
-      # end
+      visit user_path(user)
+      within ".hosting_parties" do
+        expect(page).to have_content(@movie1.title) #Reservoir Dogs
+        expect(page).to have_content(@party1.party_date.strftime("%B %d, %Y"))
+        expect(page).to have_content(@party1.party_time.strftime("%I:%M%p"))
+        expect(page).to have_content("Hosting")
+      end
     end
   end
 end

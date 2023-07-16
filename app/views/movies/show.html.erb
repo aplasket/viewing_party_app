@@ -1,11 +1,13 @@
-<h3 class="title"><%= @movie_facade.show_movie_details.title %></h3>
+<h3 class="title"><%= @facade.movie.title %></h3>
 
-<%= button_to "Discover Page", user_discover_index_path(@user), method: :get %></br>
-<%= button_to "Create Viewing Party for #{@movie_facade.show_movie_details.title}",  new_user_movie_viewing_party_path(@user, @movie.id), method: :get %>
+<%= button_to "Discover Page", user_discover_index_path(@facade.user_id), method: :get %></br>
+<%= button_to "Create Viewing Party for #{@facade.movie.title}",
+  new_user_movie_viewing_party_path(@facade.user_id, @facade.movie.id),
+  method: :get %>
 
-<h5 class="vote_avg">Vote: <%= @movie.vote_average %></h5>
-<h5 class="runtime">Runtime: <%= format_runtime(@movie.runtime) %></h5>
-<h5 class="genre">Genre: <% @movie.genres.each do |genre| %>
+<h5 class="vote_avg">Vote: <%= @facade.movie.vote_average %></h5>
+<h5 class="runtime">Runtime: <%= format_runtime(@facade.movie.runtime) %></h5>
+<h5 class="genre">Genre: <% @facade.movie.genres.each do |genre| %>
     <ul><li><%= genre[:name]%></li></ul>
   <% end %>
 </h5>
@@ -14,21 +16,21 @@
 
 <div class ="summary">
   <h4>Summary</h4>
-  <p><%= @movie.overview %></p>
+  <p><%= @facade.movie.overview %></p>
 </div>
 
 </br>
 
 <h4>Cast</h4>
-<% @credit_facade.show_credits.cast.each do |cast_member| %>
+<% @facade.credits.cast.each do |cast_member| %>
   <div class="cast">
       <p>Actor: <%= cast_member[0] %> as Character: <%= cast_member[1]%></p>
   </div>
 <% end %>
 
 <div class="reviews">
-<h4><%= @review_facade.show_reviews.review_count %> Reviews</h4>
-  <% @review_facade.show_reviews.all_reviews.each do |review| %></p>
+<h4><%= @facade.reviews.review_count %> Reviews</h4>
+  <% @facade.reviews.all_reviews.each do |review| %></p>
     <ul><li><%= review %></li></ul>
   <% end %>
 </div>
