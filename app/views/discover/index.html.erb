@@ -1,6 +1,6 @@
 <h2>Discover Movies</h2>
 
-<%= button_to "Find Top Rated Movies", user_movies_path(@user), method: :get, params: { q: 'top%20rated' } %>
+<%= button_to "Find Top Rated Movies", user_movies_path(@user.id), method: :get, params: { q: 'top%20rated' } %>
 </br>
 
 <div class="search-movies">
