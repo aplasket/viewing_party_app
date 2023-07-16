@@ -2,15 +2,16 @@ class ViewingPartiesController < ApplicationController
   before_action :find_user
 
   def new
-    @movie = MovieFacade.get_movie(params[:movie_id])
+    movie_id = params[:movie_id].to_i
+    @movie = MovieFacade.new(id: movie_id).movie
     @users = User.other_users(@user.id)
   end
 
   def create
     movie_party = Party.new(party_params)
     if movie_party.save
-      create_user_parties(movie_party)
       make_host(movie_party)
+      create_user_parties(movie_party)
       redirect_to user_path(@user)
     else
       flash[:error] = "Error: All fields must be filled in!"
@@ -34,7 +35,7 @@ class ViewingPartiesController < ApplicationController
 
   def make_host(party)
     host = find_user
-    UserParty.create(user_id: host.id, party_id: party, is_host: true)
+    UserParty.create(user_id: host.id, party_id: party.id, is_host: true)
   end
 
   def create_user_parties(party)

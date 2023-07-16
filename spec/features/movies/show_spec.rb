@@ -3,12 +3,13 @@ require "rails_helper"
 RSpec.describe "/users/:user_id/movies/:movie_id", type: :feature do
   let!(:user) { create(:user) }
 
-  before(:each) do
-    visit user_movie_path(user, 238)
-  end
-
   describe "as a user on a movie's show page" do
     it "the page displays info about the movie", :vcr do
+      params = {id: 238}
+      movie = MovieFacade.new(params).movie
+
+      visit user_movie_path(user, movie.id)
+
       expect(page).to have_css(".title")
       expect(page).to have_css(".vote_avg")
       expect(page).to have_css(".runtime")
@@ -20,6 +21,11 @@ RSpec.describe "/users/:user_id/movies/:movie_id", type: :feature do
     end
 
     it "shows the first 10 cast members", :vcr do
+      params = {id: 238}
+      movie = MovieFacade.new(params).movie
+
+      visit user_movie_path(user, movie.id)
+
       expect(page).to have_content("Cast")
       expect(page).to have_content("Actor: Marlon Brando as Character: Don Vito Corleone")
       expect(page).to have_content("Actor: Al Pacino as Character: Michael Corleone")
@@ -34,6 +40,11 @@ RSpec.describe "/users/:user_id/movies/:movie_id", type: :feature do
     end
 
     it "displays total number of reviews, each review with author and comments", :vcr do
+      params = {id: 238}
+      movie = MovieFacade.new(params).movie
+
+      visit user_movie_path(user, movie.id)
+
       within(".reviews") do
         expect(page).to have_content("5 Reviews")
         expect(page).to have_content("futuretv")
@@ -43,12 +54,22 @@ RSpec.describe "/users/:user_id/movies/:movie_id", type: :feature do
     end
 
     it "has a button to route back to the discover page", :vcr do
+      params = {id: 238}
+      movie = MovieFacade.new(params).movie
+
+      visit user_movie_path(user, movie.id)
+
       click_button "Discover Page"
 
       expect(current_path).to eq(user_discover_index_path(user))
     end
 
     it "has a button to create a viewing party for this movie", :vcr do
+      params = {id: 238}
+      movie = MovieFacade.new(params).movie
+
+      visit user_movie_path(user, movie.id)
+      
       click_button "Create Viewing Party for The Godfather"
 
       expect(current_path).to eq(new_user_movie_viewing_party_path(user, 238))
