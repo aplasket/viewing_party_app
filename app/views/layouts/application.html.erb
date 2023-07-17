@@ -17,8 +17,14 @@
         <% end %>
     </div>
 
-    <%= link_to "Home", root_path %>
     <h1>Viewing Party</h1>
+    <%= link_to "Home", root_path %>
+    <%# if current_user %>
+      <%= link_to "Log Out" %>
+    <%# else %>
+      <%= button_to "Create a New User", register_path, method: :get %>
+      <%= link_to "Log In", login_path %>
+    <%# end %>
     <%= yield %>
   </body>
 </html>

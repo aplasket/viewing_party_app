@@ -36,4 +36,57 @@ RSpec.describe "/", type: :feature do
       end
     end
   end
+
+  describe "logging in" do
+    it "happy path, log in link routes to user dashboard upon successful login" do
+      user = create(:user, password: "testing", password_confirmation: "testing")
+      visit root_path
+
+      click_on "Log In"
+
+      expect(current_path).to eq(login_path)
+
+      fill_in :email, with: user.email
+      fill_in :password, with: user.password
+
+      click_on "Submit"
+      expect(current_path).to eq(user_path(user))
+    end
+
+    it "happy path, upon successful login you can see a log out button" do
+      user = create(:user, password: "testing", password_confirmation: "testing")
+      visit root_path
+
+      click_on "Log In"
+
+      expect(current_path).to eq(login_path)
+
+      fill_in :email, with: user.email
+      fill_in :password, with: user.password
+
+      click_on "Submit"
+      expect(current_path).to eq(user_path(user))
+
+      expect(page).to have_link("Log Out")
+      # expect(page).to_not have_button("Create a New User")
+      # expect(page).to_not have_button("Log In")
+    end
+
+    it "sad path, cannot login with bad credentials" do
+      user = create(:user, password: "testing", password_confirmation: "testing")
+      visit root_path
+
+      click_on "Log In"
+
+      expect(current_path).to eq(login_path)
+
+      fill_in :email, with: user.email
+      fill_in :password, with: "test"
+
+      click_on "Submit"
+
+      expect(current_path).to eq(login_path)
+      expect(page).to have_content("Credentials invalid")
+    end
+  end
 end

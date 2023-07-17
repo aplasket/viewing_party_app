@@ -13,4 +13,7 @@ Rails.application.routes.draw do
       resources :viewing_parties, only: [:new, :create]
     end
   end
+
+  get "/login", to: "users#login_form"
+  post "/login", to: "users#login"
 end
