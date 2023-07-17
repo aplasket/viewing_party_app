@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "/users/:user_id/movies/:movie_id", type: :feature do
-  let!(:user) { create(:user) }
+  let!(:user) { create(:user, password: "test123", password_confirmation: "test123") }
 
   describe "as a user on a movie's show page" do
     it "the page displays info about the movie", :vcr do
@@ -69,7 +69,7 @@ RSpec.describe "/users/:user_id/movies/:movie_id", type: :feature do
       movie = MovieFacade.new(params).movie
 
       visit user_movie_path(user, movie.id)
-      
+
       click_button "Create Viewing Party for The Godfather"
 
       expect(current_path).to eq(new_user_movie_viewing_party_path(user, 238))

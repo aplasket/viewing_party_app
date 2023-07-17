@@ -22,9 +22,9 @@ RSpec.describe "/", type: :feature do
     end
 
     it "has a list of Existing Users which links to the users dashboard" do
-      user1 = create(:user)
-      user2 = create(:user)
-      user3 = create(:user)
+      user1 = create(:user, password: "test123", password_confirmation: "test123")
+      user2 = create(:user, password: "test314", password_confirmation: "test314")
+      user3 = create(:user, password: "test498", password_confirmation: "test498")
 
       visit root_path
 
@@ -34,6 +34,59 @@ RSpec.describe "/", type: :feature do
         expect(page).to have_link(user2.email)
         expect(page).to have_link(user3.email)
       end
+    end
+  end
+
+  describe "logging in" do
+    it "happy path, log in link routes to user dashboard upon successful login" do
+      user = create(:user, password: "testing", password_confirmation: "testing")
+      visit root_path
+
+      click_on "Log In"
+
+      expect(current_path).to eq(login_path)
+
+      fill_in :email, with: user.email
+      fill_in :password, with: user.password
+
+      click_on "Submit"
+      expect(current_path).to eq(user_path(user))
+    end
+
+    it "happy path, upon successful login you can see a log out button" do
+      user = create(:user, password: "testing", password_confirmation: "testing")
+      visit root_path
+
+      click_on "Log In"
+
+      expect(current_path).to eq(login_path)
+
+      fill_in :email, with: user.email
+      fill_in :password, with: user.password
+
+      click_on "Submit"
+      expect(current_path).to eq(user_path(user))
+
+      expect(page).to have_link("Log Out")
+      # expect(page).to_not have_button("Create a New User")
+      # expect(page).to_not have_button("Log In")
+    end
+
+    it "sad path, cannot login with bad credentials" do
+      user = create(:user, password: "testing", password_confirmation: "testing")
+      visit root_path
+
+      click_on "Log In"
+
+      expect(current_path).to eq(login_path)
+
+      fill_in :email, with: user.email
+      fill_in :password, with: "test"
+
+      click_on "Submit"
+
+      expect(current_path).to eq(login_path)
+      expect(page).to have_content("Credentials invalid")
     end
   end
 end

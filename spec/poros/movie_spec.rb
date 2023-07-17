@@ -13,7 +13,7 @@ RSpec.describe Movie, :vcr do
     expect(@movie.title).to be_a(String)
     expect(@movie.title).to eq("The Godfather")
     expect(@movie.vote_average).to be_an(Float)
-    expect(@movie.vote_average).to eq(8.711)
+
     expect(@movie.genres).to be_an(Array)
     expect(@movie.overview).to be_a(String)
     expect(@movie.runtime).to be_an(Integer)

@@ -10,14 +10,18 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:email) }
     it { should validate_uniqueness_of(:email).case_insensitive }
     it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:password) }
+    it { should validate_confirmation_of(:password) }
+    it { should validate_presence_of(:password_confirmation) }
+    it { should have_secure_password }
   end
 
 
   describe "#other_users", :vcr do
     before(:each) do
-      @user1 = create(:user)
-      @user2 = create(:user)
-      @user3 = create(:user)
+      @user1 = create(:user, password: "tests", password_confirmation: "tests")
+      @user2 = create(:user, password: "tests", password_confirmation: "tests")
+      @user3 = create(:user, password: "tests", password_confirmation: "tests")
 
       @movie1 = MovieFacade.new({id: 500}).movie
       @movie2 = MovieFacade.new({id: 400}).movie
@@ -38,9 +42,9 @@ RSpec.describe User, type: :model do
 
   describe "#invitations", :vcr do
     before(:each) do
-      @user1 = create(:user)
-      @user2 = create(:user)
-      @user3 = create(:user)
+      @user1 = create(:user, password: "tests", password_confirmation: "tests")
+      @user2 = create(:user, password: "tests", password_confirmation: "tests")
+      @user3 = create(:user, password: "tests", password_confirmation: "tests")
 
       @movie1 = MovieFacade.new({id: 500}).movie
       @movie2 = MovieFacade.new({id: 400}).movie
@@ -53,7 +57,7 @@ RSpec.describe User, type: :model do
       @user_party3 = UserParty.create!(user_id: @user1.id, party_id: @party2.id, is_host: true)
       @user_party4 = UserParty.create!(user_id: @user3.id, party_id: @party2.id, is_host: false)
     end
-    
+
     it "returns the parties the user is invited to", :vcr do
       expect(@user1.invitations).to include(@party1)
       expect(@user2.invitations).to eq([])

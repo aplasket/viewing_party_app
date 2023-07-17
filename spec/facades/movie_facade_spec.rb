@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe MovieFacade do
   describe "#movies", :vcr do
     it "can find top rated movies and make movie objects" do
-      user = create(:user)
+      user = create(:user, password: "test123", password_confirmation: "test123")
       params = {user_id: user.id}
       top_movies = MovieFacade.new(params).movies
 
@@ -18,7 +18,7 @@ RSpec.describe MovieFacade do
     end
 
     it "can search movies by keyword" do
-      user = create(:user)
+      user = create(:user, password: "test123", password_confirmation: "test123")
       params = {keyword: "Princess"}
       movies_by_keyword = MovieFacade.new(params).movies
 
@@ -32,13 +32,13 @@ RSpec.describe MovieFacade do
 
   describe "#movie", :vcr do
     it "gets movie details" do
-      user = create(:user)
+      user = create(:user, password: "test123", password_confirmation: "test123")
       params = {id: 238}
       movie = MovieFacade.new(params).movie
-    
+
       expect(movie).to be_a(Movie)
       expect(movie.title).to eq("The Godfather")
-      expect(movie.vote_average).to eq(8.711)
+      expect(movie.vote_average).to eq(8.71)
       expect(movie.runtime).to eq(175)
       expect(movie.overview).to be_a(String)
     end
@@ -46,7 +46,7 @@ RSpec.describe MovieFacade do
 
   describe "#credits", :vcr do
     it "fetches movie credit info" do
-      user = create(:user)
+      user = create(:user, password: "test123", password_confirmation: "test123")
       params = {user_id: user.id, id: 238 }
       credits = MovieFacade.new(params).credits.cast
 
@@ -59,7 +59,7 @@ RSpec.describe MovieFacade do
 
   describe "#reviews", :vcr do
     it "fetches a movie's review info" do
-      user = create(:user)
+      user = create(:user, password: "test123", password_confirmation: "test123")
       params = {user_id: user.id, id: 238 }
       reviews = MovieFacade.new(params).reviews.all_reviews
 

@@ -4,16 +4,20 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: { case_sensitive: false }
+  validates :password, presence: true, confirmation: true
+  validates :password_confirmation, presence: true
+
+  has_secure_password
 
   def self.other_users(id)
     where.not(id:)
   end
 
   def invitations
-    parties.joins(:user_parties).where("user_parties.is_host = false")
+    parties.joins(:user_parties).where("user_parties.is_host = false").group(:id)
   end
 
   def parties_hosting
-    parties.joins(:user_parties).where("user_parties.is_host = true")
+    parties.joins(:user_parties).where("user_parties.is_host = true").group(:id)
   end
 end
