@@ -10,6 +10,8 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:email) }
     it { should validate_uniqueness_of(:email).case_insensitive }
     it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:password_digest)}
+    it { should have_secure_password }
   end
 
 
@@ -53,7 +55,7 @@ RSpec.describe User, type: :model do
       @user_party3 = UserParty.create!(user_id: @user1.id, party_id: @party2.id, is_host: true)
       @user_party4 = UserParty.create!(user_id: @user3.id, party_id: @party2.id, is_host: false)
     end
-    
+
     it "returns the parties the user is invited to", :vcr do
       expect(@user1.invitations).to include(@party1)
       expect(@user2.invitations).to eq([])
