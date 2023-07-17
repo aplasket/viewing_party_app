@@ -35,10 +35,10 @@ RSpec.describe MovieFacade do
       user = create(:user)
       params = {id: 238}
       movie = MovieFacade.new(params).movie
-    
+
       expect(movie).to be_a(Movie)
       expect(movie.title).to eq("The Godfather")
-      expect(movie.vote_average).to eq(8.711)
+      expect(movie.vote_average).to eq(8.71)
       expect(movie.runtime).to eq(175)
       expect(movie.overview).to be_a(String)
     end
