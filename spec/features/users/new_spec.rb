@@ -14,6 +14,8 @@ RSpec.describe "/register", type: :feature do
       within ".register_form" do
         expect(page).to have_field("Name:")
         expect(page).to have_field("Email:")
+        expect(page).to have_field("Password:")
+        expect(page).to have_field("Confirm Password:")
         expect(page).to have_button("Create a New User")
       end
     end
@@ -24,6 +26,8 @@ RSpec.describe "/register", type: :feature do
       within ".register_form" do
         fill_in "Name", with: "John Doe"
         fill_in "Email", with: "johndoe@email.com"
+        fill_in "Password", with: "test"
+        fill_in "Confirm Password", with: "test"
         click_button "Create a New User"
         new_user = User.all.last
         expect(current_path).to eq(user_path(new_user))
@@ -57,5 +61,13 @@ RSpec.describe "/register", type: :feature do
       expect(current_path).to eq(register_path)
       expect(page).to have_content("Email has already been taken")
     end
+  end
+
+  describe "registration with authentication" do
+    # As a visitor
+    # When I visit `/register`
+    # I see a form to fill in my name, email, password, and password confirmation.
+    # When I fill in that form with my name, email, and matching passwords,
+    # I'm taken to my dashboard page `/users/:id`
   end
 end
