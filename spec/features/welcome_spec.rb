@@ -22,9 +22,9 @@ RSpec.describe "/", type: :feature do
     end
 
     it "has a list of Existing Users which links to the users dashboard" do
-      user1 = create(:user)
-      user2 = create(:user)
-      user3 = create(:user)
+      user1 = create(:user, password: "test123", password_confirmation: "test123")
+      user2 = create(:user, password: "test314", password_confirmation: "test314")
+      user3 = create(:user, password: "test498", password_confirmation: "test498")
 
       visit root_path
 

@@ -2,9 +2,9 @@ require "rails_helper"
 
 RSpec.describe "/users/:user_id/movies/:movie_id/viewing-party/new" do
   before(:each) do
-    @user = User.create!(name: "Silly Billy", email: "silly_billy@email.com")
-    @user2 = User.create!(name: "Michael", email: "michael@email.com")
-    @user3 = User.create!(name: "Tula", email: "tula@email.com")
+    @user = User.create!(name: "Silly Billy", email: "silly_billy@email.com", password: "test123", password_confirmation: "test123")
+    @user2 = User.create!(name: "Michael", email: "michael@email.com", password: "test", password_confirmation: "test")
+    @user3 = User.create!(name: "Tula", email: "tula@email.com", password: "test415", password_confirmation: "test415")
     @movie = MovieFacade.new({id: 238}).movie
 
     visit new_user_movie_viewing_party_path(@user, @movie.id)

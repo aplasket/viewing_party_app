@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "/users/:id/movies", type: :feature do
-  let!(:user) { create(:user) }
+  let!(:user) { create(:user, password: "test123", password_confirmation: "test123") }
 
   describe "when a user visits the discovery page" do
     describe "and they click on Find Top Rated Movies", :vcr do

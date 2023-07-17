@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "/users/:id/discover, Discover Movies Dashboard", type: :feature do
-  let!(:user) { create(:user) }
+  let!(:user) { create(:user, password: "test123", password_confirmation: "test123") }
 
   describe "on the discover movies dashboard" do
     it "I see a page title of Discover Movies" do
