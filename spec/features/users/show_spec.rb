@@ -2,8 +2,8 @@ require "rails_helper"
 
 RSpec.describe "user_path(user)", type: :feature do
   describe "on a user dashboard" do
-    let(:user) { create(:user) }
-    let(:user2) { create(:user) }
+    let(:user) { create(:user, password: "tests", password_confirmation: "tests") }
+    let(:user2) { create(:user, password: "tests123", password_confirmation: "tests123") }
 
     before(:each) do
       @movie1 = MovieFacade.new({id: 500}).movie
