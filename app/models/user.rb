@@ -14,10 +14,10 @@ class User < ApplicationRecord
   end
 
   def invitations
-    parties.joins(:user_parties).where("user_parties.is_host = false")
+    parties.joins(:user_parties).where("user_parties.is_host = false").group(:id)
   end
 
   def parties_hosting
-    parties.joins(:user_parties).where("user_parties.is_host = true")
+    parties.joins(:user_parties).where("user_parties.is_host = true").group(:id)
   end
 end
