@@ -12,7 +12,8 @@ class ViewingPartiesController < ApplicationController
     if movie_party.save
       make_host(movie_party)
       create_user_parties(movie_party)
-      redirect_to user_path(@user)
+      # redirect_to user_path(@user)
+      redirect_to dashboard_path
     else
       flash[:error] = "Error: All fields must be filled in!"
       redirect_to new_user_movie_viewing_party_path(@user, params[:movie_id])

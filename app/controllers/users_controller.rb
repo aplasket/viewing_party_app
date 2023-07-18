@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   def show
-    @user = User.find(params[:id])
+    if current_user
+      @user = User.find(current_user.id)
+    else
+      flash[:error] = "You must be logged in or registered to access your dashboard"
+    end
   end
 
   def new
@@ -10,7 +14,9 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
-      redirect_to user_path(user.id)
+      session[:user_id] = user.id
+      # redirect_to user_path(user.id)
+      redirect_to dashboard_path
     else
       flash[:error] = "Error: #{user.errors.full_messages.to_sentence}"
       redirect_to register_path
@@ -24,11 +30,18 @@ class UsersController < ApplicationController
     user = User.find_by(email: params[:email])
     if user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to user_path(user)
+      # redirect_to user_path(user)
+      redirect_to dashboard_path
     else
+      # render :login_form
       flash[:error] = "Credentials invalid"
-      render :login_form
+      redirect_to login_path
     end
+  end
+
+  def logout
+    reset_session
+    redirect_to root_path
   end
 
   private

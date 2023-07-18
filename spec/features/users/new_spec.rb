@@ -33,8 +33,9 @@ RSpec.describe "/register", type: :feature do
         click_button "Create a New User"
 
         new_user = User.all.last
-    
-        expect(current_path).to eq(user_path(new_user))
+
+        # expect(current_path).to eq(user_path(new_user))
+        expect(current_path).to eq(dashboard_path)
         expect(new_user).to_not have_attribute(:password)
         expect(new_user.password_digest).to_not eq("test")
       end

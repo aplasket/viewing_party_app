@@ -45,4 +45,10 @@ class MovieFacade
   def reviews
     Review.new(service.movie_reviews(@movie_id))
   end
+
+  def images
+    image_data = Movie.new(service.movie_images(@movie_id)).first
+
+    "https://image.tmdb.org/t/p/original#{image_data[:file_path]}"
+  end
 end
