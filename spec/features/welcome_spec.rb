@@ -35,6 +35,11 @@ RSpec.describe "/", type: :feature do
         expect(page).to_not have_link(user3.email)
       end
     end
+
+    it "sad path, visitors cannot visit dashboard path" do
+      visit dashboard_path
+      expect(page).to have_content("You must be logged in or registered to access your dashboard")
+    end
   end
 
   describe "logging in" do
@@ -111,6 +116,37 @@ RSpec.describe "/", type: :feature do
         expect(page).to have_content(user2.email)
         expect(page).to have_content(user3.email)
       end
+    end
+
+    it "if user is registered and logged in, they can click dashboard button from root path" do
+      user = create(:user, password: "testing", password_confirmation: "testing")
+      visit login_path
+
+      fill_in :email, with: user.email
+      fill_in :password, with: user.password
+
+      click_on "Submit"
+      expect(current_path).to eq(user_path(user))
+
+      click_on "Home"
+      click_on "Dashboard"
+      expect(current_path).to eq(dashboard_path)
+    end
+
+    it "if user is registered and logged in, they can visit '/dashboard' from root path" do
+      user = create(:user, password: "testing", password_confirmation: "testing")
+      visit login_path
+
+      fill_in :email, with: user.email
+      fill_in :password, with: user.password
+
+      click_on "Submit"
+      expect(current_path).to eq(user_path(user))
+
+      click_on "Home"
+
+      visit dashboard_path
+      expect(current_path).to eq(dashboard_path)
     end
   end
 
