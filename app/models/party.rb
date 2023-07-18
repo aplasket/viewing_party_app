@@ -14,7 +14,8 @@ class Party < ApplicationRecord
       movie_id: movie.id,
       duration: duration,
       party_date: party_date,
-      party_time: party_time
+      party_time: party_time,
+      image: "https://image.tmdb.org/t/p/original#{movie.poster_path}"
     }
   end
 end
