@@ -67,9 +67,9 @@ RSpec.describe "/", type: :feature do
       click_on "Submit"
       expect(current_path).to eq(user_path(user))
 
-      expect(page).to have_link("Log Out")
-      # expect(page).to_not have_button("Create a New User")
-      # expect(page).to_not have_button("Log In")
+      expect(page).to have_button("Log Out")
+      expect(page).to_not have_button("Create a New User")
+      expect(page).to_not have_button("Log In")
     end
 
     it "sad path, cannot login with bad credentials" do
@@ -87,6 +87,36 @@ RSpec.describe "/", type: :feature do
 
       expect(current_path).to eq(login_path)
       expect(page).to have_content("Credentials invalid")
+    end
+  end
+
+  describe "logging out" do
+    # As a logged in user
+    # When I visit the landing page
+    # I no longer see a link to Log In or Create an Account
+    # But I see a link to Log Out.
+    # When I click the link to Log Out
+    # I'm taken to the landing page
+    # And I can see that the Log Out link has changed back to a Log In link
+
+    it "can log a user out" do
+      user = create(:user, password: "testing", password_confirmation: "testing")
+
+      visit login_path
+
+      fill_in :email, with: user.email
+      fill_in :password, with: user.password
+
+      click_on "Submit"
+
+      expect(current_path).to eq(user_path(user))
+
+      click_on "Log Out"
+
+      expect(current_path).to eq(root_path)
+      expect(page).to_not have_button("Log Out")
+      expect(page).to have_button("Create a New User")
+      expect(page).to have_button("Log In")
     end
   end
 end
