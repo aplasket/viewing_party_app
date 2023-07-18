@@ -15,7 +15,8 @@ class UsersController < ApplicationController
     user = User.new(user_params)
     if user.save
       session[:user_id] = user.id
-      redirect_to user_path(user.id)
+      # redirect_to user_path(user.id)
+      redirect_to dashboard_path
     else
       flash[:error] = "Error: #{user.errors.full_messages.to_sentence}"
       redirect_to register_path
@@ -29,7 +30,8 @@ class UsersController < ApplicationController
     user = User.find_by(email: params[:email])
     if user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to user_path(user)
+      # redirect_to user_path(user)
+      redirect_to dashboard_path
     else
       # render :login_form
       flash[:error] = "Credentials invalid"

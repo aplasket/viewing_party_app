@@ -55,7 +55,7 @@ RSpec.describe "/", type: :feature do
       fill_in :password, with: user.password
 
       click_on "Submit"
-      expect(current_path).to eq(user_path(user))
+      expect(current_path).to eq(dashboard_path)
     end
 
     it "happy path, upon successful login you can see a log out button" do
@@ -70,7 +70,8 @@ RSpec.describe "/", type: :feature do
       fill_in :password, with: user.password
 
       click_on "Submit"
-      expect(current_path).to eq(user_path(user))
+      # expect(current_path).to eq(user_path(user))
+      expect(current_path).to eq(dashboard_path)
 
       expect(page).to have_button("Log Out")
       expect(page).to_not have_button("Create a New User")
@@ -105,7 +106,9 @@ RSpec.describe "/", type: :feature do
       fill_in :password, with: user1.password
 
       click_on "Submit"
-      expect(current_path).to eq(user_path(user1))
+      # expect(current_path).to eq(user_path(user1))
+      expect(current_path).to eq(dashboard_path)
+
 
       click_on "Home"
       expect(current_path).to eq(root_path)
@@ -126,7 +129,8 @@ RSpec.describe "/", type: :feature do
       fill_in :password, with: user.password
 
       click_on "Submit"
-      expect(current_path).to eq(user_path(user))
+      # expect(current_path).to eq(user_path(user))
+      expect(current_path).to eq(dashboard_path)
 
       click_on "Home"
       click_on "Dashboard"
@@ -141,7 +145,8 @@ RSpec.describe "/", type: :feature do
       fill_in :password, with: user.password
 
       click_on "Submit"
-      expect(current_path).to eq(user_path(user))
+      # expect(current_path).to eq(user_path(user))
+      expect(current_path).to eq(dashboard_path)
 
       click_on "Home"
 
@@ -161,7 +166,9 @@ RSpec.describe "/", type: :feature do
 
       click_on "Submit"
 
-      expect(current_path).to eq(user_path(user))
+      # expect(current_path).to eq(user_path(user))
+      expect(current_path).to eq(dashboard_path)
+
 
       click_on "Log Out"
 
