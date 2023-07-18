@@ -1,8 +1,11 @@
 <div class="users">
+
+<% if current_user %>
   <h3>Existing Users</h3>
   <% @users.each do |user| %>
     <ul>
     <li><%= link_to "#{user.email}", user_path(user) %></li>
     </ul>
   <% end %>
+<% end %>
 </div>
