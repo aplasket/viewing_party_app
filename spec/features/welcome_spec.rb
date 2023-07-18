@@ -107,9 +107,9 @@ RSpec.describe "/", type: :feature do
 
       within(".users") do
         expect(page).to have_content("Existing Users")
-        expect(page).to have_link(user1.email)
-        expect(page).to have_link(user2.email)
-        expect(page).to have_link(user3.email)
+        expect(page).to have_content(user1.email)
+        expect(page).to have_content(user2.email)
+        expect(page).to have_content(user3.email)
       end
     end
   end
@@ -133,6 +133,7 @@ RSpec.describe "/", type: :feature do
       expect(page).to_not have_button("Log Out")
       expect(page).to have_button("Create a New User")
       expect(page).to have_button("Log In")
+      expect(page).to_not have_content("Existing Users")
     end
   end
 end
