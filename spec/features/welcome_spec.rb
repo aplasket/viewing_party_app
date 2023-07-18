@@ -21,6 +21,11 @@ RSpec.describe "/", type: :feature do
       expect(page).to have_button("Create a New User")
     end
 
+    it "displays a button to discover movies" do
+      visit root_path
+      expect(page).to have_button("Discover Movies")
+    end
+
     it "sad path, visitors cannot see existing users" do
       user1 = create(:user, password: "test123", password_confirmation: "test123")
       user2 = create(:user, password: "test314", password_confirmation: "test314")

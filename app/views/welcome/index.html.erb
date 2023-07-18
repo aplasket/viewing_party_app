@@ -1,4 +1,5 @@
 <div class="users">
+  <%= button_to "Discover Movies", discover_index_path, method: :get %>
 
 <% if current_user %>
   <%= button_to "Dashboard", dashboard_path, method: :get %>

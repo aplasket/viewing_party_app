@@ -8,6 +8,12 @@ Rails.application.routes.draw do
   get "/register", to: "users#new"
   get "/dashboard", to: "users#show"
 
+  resources :discover, only: [:index]
+
+  resources :movies, only: [:index, :show] do
+      resources :viewing_parties, only: [:new, :create]
+    end
+
   resources :users, only: [:create] do
     resources :discover, only: [:index]
     resources :movies, only: [:index, :show] do
