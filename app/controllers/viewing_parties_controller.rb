@@ -16,7 +16,7 @@ class ViewingPartiesController < ApplicationController
       redirect_to dashboard_path
     else
       flash[:error] = "Error: All fields must be filled in!"
-      redirect_to new_user_movie_viewing_party_path(@user, params[:movie_id])
+      redirect_to new_movie_viewing_party_path(params[:movie_id])
     end
   end
 
@@ -34,7 +34,7 @@ class ViewingPartiesController < ApplicationController
   end
 
   def find_user
-    @user = User.find(params[:user_id])
+    @user = User.find(session[:user_id])
   end
 
   def find_party_user(id)
