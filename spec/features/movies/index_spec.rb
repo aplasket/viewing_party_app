@@ -9,7 +9,7 @@ RSpec.describe "movies_path", type: :feature do
     fill_in :password, with: user.password
     click_on "Submit"
   end
-  
+
   describe "when a user visits the discovery page" do
     describe "and they click on Find Top Rated Movies", :vcr do
       it "routes to a movie index page where the top movies are rendered" do
@@ -55,10 +55,10 @@ RSpec.describe "movies_path", type: :feature do
   end
 
   describe "as a user on the movie index page" do
-    it "displays a button to return back to the discover page", :vcr do
+    it "displays a button to return back to the discover movies page", :vcr do
       visit movies_path
 
-      click_button "Discover Page"
+      click_button "Discover Movies"
 
       expect(current_path).to eq(discover_path)
     end

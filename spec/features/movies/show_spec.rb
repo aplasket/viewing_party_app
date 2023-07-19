@@ -53,7 +53,7 @@ RSpec.describe "movie_path(:id)", type: :feature do
       end
     end
 
-    it "has a button to route back to the discover page", :vcr do
+    it "has a button to route back to the discover movies page", :vcr do
       params = {id: 238}
       movie = MovieFacade.new(params).movie
 

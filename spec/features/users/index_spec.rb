@@ -13,7 +13,7 @@ RSpec.describe "discover path" do
     visit discover_path
   end
 
-  describe "When a user visits discover page" do
+  describe "When a user visits discover movies page" do
     it "they see a page title of Discover Movies" do
       expect(page).to have_content("Discover Movies")
     end

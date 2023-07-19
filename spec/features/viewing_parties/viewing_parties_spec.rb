@@ -16,8 +16,8 @@ RSpec.describe "/users/:user_id/movies/:movie_id/viewing-party/new" do
         expect(page).to have_content("Create a Movie Party")
       end
 
-      it "has a button to return to the discover page", :vcr do
-        click_button "Discover Page"
+      it "has a button to return to the discover movies page", :vcr do
+        click_button "Discover Movies"
 
         expect(current_path).to eq(user_discover_index_path(@user))
       end
