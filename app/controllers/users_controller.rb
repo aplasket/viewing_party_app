@@ -1,9 +1,13 @@
 class UsersController < ApplicationController
+  def index; end
+
   def show
     if current_user
       @user = User.find(current_user.id)
+      @facade = MovieFacade
     else
       flash[:error] = "You must be logged in or registered to access your dashboard"
+      redirect_to root_path
     end
   end
 
@@ -15,7 +19,6 @@ class UsersController < ApplicationController
     user = User.new(user_params)
     if user.save
       session[:user_id] = user.id
-      # redirect_to user_path(user.id)
       redirect_to dashboard_path
     else
       flash[:error] = "Error: #{user.errors.full_messages.to_sentence}"
@@ -30,10 +33,8 @@ class UsersController < ApplicationController
     user = User.find_by(email: params[:email])
     if user.authenticate(params[:password])
       session[:user_id] = user.id
-      # redirect_to user_path(user)
       redirect_to dashboard_path
     else
-      # render :login_form
       flash[:error] = "Credentials invalid"
       redirect_to login_path
     end

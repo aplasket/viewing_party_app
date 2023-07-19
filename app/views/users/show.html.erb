@@ -1,12 +1,10 @@
-<% if current_user%>
   <h2><%= @user.name %>'s Dashboard</h2>
-
-  <%= button_to "Discover Movies", user_discover_index_path(@user), method: :get %>
+  <hr>
 
   <div class="invited_to_parties">
     <% @user.invitations.each do |party|%>
       <p><%= image_tag "#{party.movie_details[:image]}", size: "60x80" %></p>
-      <p><%= link_to "#{party.movie_details[:title]}", user_movie_path(@user.id, party.movie_details[:movie_id]) %></p>
+      <p><%= link_to "#{party.movie_details[:title]}", movie_path(party.movie_details[:movie_id]) %></p>
       <p><%= party.movie_details[:party_date].strftime("%B %d, %Y") %></p>
       <p><%= party.movie_details[:party_time].strftime("%I:%M%p") %></p>
       <p>Invited</p>
@@ -16,10 +14,9 @@
   <div class="hosting_parties">
     <% @user.parties_hosting.each do |party| %>
       <p><%= image_tag "#{party.movie_details[:image]}", size: "60x80" %></p>
-      <p><%= link_to "#{party.movie_details[:title]}", user_movie_path(@user.id, party.movie_details[:movie_id]) %></p>
+      <p><%= link_to "#{party.movie_details[:title]}", movie_path(party.movie_details[:movie_id]) %></p>
       <p><%= party.movie_details[:party_date].strftime("%B %d, %Y") %></p>
       <p><%= party.movie_details[:party_time].strftime("%I:%M%p") %></p>
       <p>Hosting</p>
     <% end %>
   </div>
-<% end %>
