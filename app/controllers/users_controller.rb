@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
-  def index
-    @user = User.find(session[:user_id])
-  end
+  def index; end
 
   def show
     if current_user
@@ -35,10 +33,8 @@ class UsersController < ApplicationController
     user = User.find_by(email: params[:email])
     if user.authenticate(params[:password])
       session[:user_id] = user.id
-      # redirect_to user_path(user)
       redirect_to dashboard_path
     else
-      # render :login_form
       flash[:error] = "Credentials invalid"
       redirect_to login_path
     end
