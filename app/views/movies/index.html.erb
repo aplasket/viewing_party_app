@@ -1,10 +1,10 @@
-<%= button_to "Discover Page", user_discover_index_path(@facade.user_id), method: :get %>
+<%= button_to "Discover Page", discover_path, method: :get %>
 
 <%= @facade.title_statement%>
 
 <% @facade.movies.each do |movie| %>
   <div class="movie">
-      <p class="title"><%= link_to "#{movie.title}", user_movie_path(@facade.user_id, movie.id) %></p>
+      <p class="title"><%= link_to "#{movie.title}", movie_path(movie.id) %></p>
       <p class="vote_avg">Vote Average: <%= movie.vote_average%></p>
   </div>
 <% end %>
