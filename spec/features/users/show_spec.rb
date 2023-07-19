@@ -22,21 +22,18 @@ RSpec.describe "dashboard path", type: :feature do
     end
 
     it "should render only the user's name", :vcr do
-      # expect(current_path).to eq(user_path(user))
       expect(current_path).to eq(dashboard_path)
       expect(page).to have_content("#{user.name}'s Dashboard")
       expect(page).to_not have_content("#{user2.name}'s Dashboard")
     end
 
     it "routes me to the discover movies dashboard", :vcr do
-      # expect(current_path).to eq(user_path(user))
       expect(current_path).to eq(dashboard_path)
       click_button "Discover Movies"
-      expect(current_path).to eq(user_discover_index_path(user))
+      expect(current_path).to eq(discover_path)
     end
 
     it "should render the parties the user is invited to", :vcr do
-      # expect(current_path).to eq(user_path(user))
       expect(current_path).to eq(dashboard_path)
 
       within ".hosting_parties" do

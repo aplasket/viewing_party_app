@@ -7,7 +7,13 @@ RSpec.describe "/users/:user_id/movies/:movie_id/viewing-party/new" do
     @user3 = User.create!(name: "Tula", email: "tula@email.com", password: "test415", password_confirmation: "test415")
     @movie = MovieFacade.new({id: 238}).movie
 
-    visit new_user_movie_viewing_party_path(@user, @movie.id)
+    visit login_path
+
+    fill_in :email, with: @user.email
+    fill_in :password, with: @user.password
+    click_on "Submit"
+
+    visit new_movie_viewing_party_path(@movie.id)
   end
 
   describe "as a user on the viewing party page" do
@@ -19,7 +25,7 @@ RSpec.describe "/users/:user_id/movies/:movie_id/viewing-party/new" do
       it "has a button to return to the discover movies page", :vcr do
         click_button "Discover Movies"
 
-        expect(current_path).to eq(user_discover_index_path(@user))
+        expect(current_path).to eq(discover_path)
       end
     end
 
@@ -40,7 +46,6 @@ RSpec.describe "/users/:user_id/movies/:movie_id/viewing-party/new" do
           click_button "Create Party"
         end
 
-        # expect(current_path).to eq(user_path(@user))
         expect(current_path).to eq(dashboard_path)
       end
 
@@ -53,7 +58,7 @@ RSpec.describe "/users/:user_id/movies/:movie_id/viewing-party/new" do
           click_button "Create Party"
         end
 
-        expect(current_path).to eq(new_user_movie_viewing_party_path(@user, @movie.id))
+        expect(current_path).to eq(new_movie_viewing_party_path(@movie.id))
         expect(page).to have_content("Error: All fields must be filled in!")
       end
     end
