@@ -3,7 +3,7 @@
 <h4>Viewing Party Details</h4>
 <div class="party_details">
   <p>Movie Title: <%= @movie.title %></p>
-    <%= form_with url: user_movie_viewing_parties_path(@user, @movie.id), local: true do |f| %>
+    <%= form_with url: movie_viewing_parties_path(@movie.id), local: true do |f| %>
       <%= f.label :duration, "Duration of Party" %>
       <%= f.number_field :duration, value: @movie.runtime, min: @movie.runtime, max: 300 %></br>
       <%= f.label :party_date, "Day" %>
