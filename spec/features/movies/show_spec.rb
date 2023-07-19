@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "/users/:user_id/movies/:movie_id", type: :feature do
+RSpec.describe "movie_path(:id)", type: :feature do
   let!(:user) { create(:user, password: "test123", password_confirmation: "test123") }
 
   describe "as a user on a movie's show page" do
@@ -8,7 +8,7 @@ RSpec.describe "/users/:user_id/movies/:movie_id", type: :feature do
       params = {id: 238}
       movie = MovieFacade.new(params).movie
 
-      visit user_movie_path(user, movie.id)
+      visit movie_path(movie.id)
 
       expect(page).to have_css(".title")
       expect(page).to have_css(".vote_avg")
@@ -24,7 +24,7 @@ RSpec.describe "/users/:user_id/movies/:movie_id", type: :feature do
       params = {id: 238}
       movie = MovieFacade.new(params).movie
 
-      visit user_movie_path(user, movie.id)
+      visit movie_path(movie.id)
 
       expect(page).to have_content("Cast")
       expect(page).to have_content("Actor: Marlon Brando as Character: Don Vito Corleone")
@@ -43,7 +43,7 @@ RSpec.describe "/users/:user_id/movies/:movie_id", type: :feature do
       params = {id: 238}
       movie = MovieFacade.new(params).movie
 
-      visit user_movie_path(user, movie.id)
+      visit movie_path(movie.id)
 
       within(".reviews") do
         expect(page).to have_content("5 Reviews")
@@ -57,22 +57,51 @@ RSpec.describe "/users/:user_id/movies/:movie_id", type: :feature do
       params = {id: 238}
       movie = MovieFacade.new(params).movie
 
-      visit user_movie_path(user, movie.id)
+      visit movie_path(movie.id)
 
-      click_button "Discover Page"
+      click_button "Discover Movies"
 
-      expect(current_path).to eq(user_discover_index_path(user))
+      expect(current_path).to eq(discover_path)
     end
 
     it "has a button to create a viewing party for this movie", :vcr do
       params = {id: 238}
       movie = MovieFacade.new(params).movie
 
-      visit user_movie_path(user, movie.id)
+      visit movie_path(movie.id)
+      expect(page).to have_button("Create Viewing Party for The Godfather")
+    end
+  end
+
+  describe "as a registered and logged in user, able to create a new viewing party" do
+    it "has a button to create a viewing party for this movie", :vcr do
+      params = {id: 238}
+      movie = MovieFacade.new(params).movie
+
+      visit login_path
+      fill_in :email, with: user.email
+      fill_in :password, with: user.password
+      click_on "Submit"
+
+      visit movie_path(movie.id)
 
       click_button "Create Viewing Party for The Godfather"
 
-      expect(current_path).to eq(new_user_movie_viewing_party_path(user, 238))
+      expect(current_path).to eq(new_movie_viewing_party_path(movie.id))
+    end
+  end
+
+  describe "as a visitor, cannot create a viewing party" do
+    it "when clicking the button, redirected to movie page and see an error message", :vcr do
+      params = {id: 238}
+      movie = MovieFacade.new(params).movie
+
+      visit movie_path(movie.id)
+
+      click_button "Create Viewing Party for The Godfather"
+
+      expect(current_path).to eq(movie_path(movie.id))
+      expect(page).to have_content("You must be logged in or registered to create a party")
     end
   end
 end
