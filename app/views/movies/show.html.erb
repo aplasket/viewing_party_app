@@ -1,6 +1,5 @@
 <h3 class="title"><%= @facade.movie.title %></h3>
 
-<%= button_to "Discover Page", discover_path, method: :get %></br>
 <%= button_to "Create Viewing Party for #{@facade.movie.title}",
   new_movie_viewing_party_path(@facade.movie.id),
   method: :get %>
