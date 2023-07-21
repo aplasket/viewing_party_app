@@ -11,23 +11,34 @@
   </head>
 
   <body>
-    <h1>Viewing Party</h1>
+    <div class="top-container">
+      <h1>Viewing Party</h1>
 
-    <div class="container">
-        <% flash.each do |type, notice| %>
-          <h5 class="text-info"><b><%= notice %></b></h5>
-        <% end %>
+      <div class="container">
+          <% flash.each do |type, notice| %>
+            <h5 class="text-info"><b><%= notice %></b></h5>
+          <% end %>
+      </div>
+      
+      <div class="nav-container container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <ul class="nav navbar-nav pull-right">
+            <li><%= button_to "Home", root_path, method: :get %></li>
+            <li><%= button_to "Discover Movies", discover_path, method: :get, class: 'link_1', style: 'pull-right' %></li>
+
+              <% if current_user %>
+                <li><%= button_to "Log Out", login_path, method: :delete, class: 'link_1', style: 'pull-right' %></li>
+              <% else %>
+                <li><%= button_to "Create a New User", register_path, method: :get, class: 'link_1', style: 'pull-right' %></li>
+                <li><%= button_to "Log In", login_path, method: :get, class: 'link_1', style: 'pull-right' %></li>
+              <% end %>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="container">
+        <%= yield %>
+      </div>
     </div>
-
-    <%= button_to "Home", root_path, method: :get %>
-    <%= button_to "Discover Movies", discover_path, method: :get %>
-
-    <% if current_user %>
-      <%= button_to "Log Out", login_path, method: :delete %>
-    <% else %>
-      <%= button_to "Create a New User", register_path, method: :get %>
-      <%= button_to "Log In", login_path, method: :get %>
-    <% end %>
-    <%= yield %>
   </body>
 </html>
