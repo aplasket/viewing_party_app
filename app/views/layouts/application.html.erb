@@ -19,18 +19,20 @@
             <h5 class="text-info"><b><%= notice %></b></h5>
           <% end %>
       </div>
-      
+
       <div class="nav-container container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <ul class="nav navbar-nav pull-right">
+          <ul class="nav navbar-nav">
             <li><%= button_to "Home", root_path, method: :get %></li>
-            <li><%= button_to "Discover Movies", discover_path, method: :get, class: 'link_1', style: 'pull-right' %></li>
+            <li><%= button_to "Discover Movies", discover_path, method: :get %></li>
 
               <% if current_user %>
-                <li><%= button_to "Log Out", login_path, method: :delete, class: 'link_1', style: 'pull-right' %></li>
+                <li><%= button_to "My Dashboard", dashboard_path, method: :get %></li>
+                <li><%= button_to "Log Out", login_path, method: :delete %></li>
+
               <% else %>
-                <li><%= button_to "Create a New User", register_path, method: :get, class: 'link_1', style: 'pull-right' %></li>
-                <li><%= button_to "Log In", login_path, method: :get, class: 'link_1', style: 'pull-right' %></li>
+                <li><%= button_to "Create a New User", register_path, method: :get %></li>
+                <li><%= button_to "Log In", login_path, method: :get %></li>
               <% end %>
           </ul>
         </nav>

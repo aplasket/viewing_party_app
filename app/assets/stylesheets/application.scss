@@ -25,12 +25,10 @@
 }
 
 .navbar {
+   display: flex;
+   justify-content: space-between;
+   align-items: stretch;
    margin-bottom: 30px;
-   .navbar-text {
-      margin-top: 1px;
-      margin-bottom: 1px;
-      font-weight: bold;
-   }
 }
 
 .table {
