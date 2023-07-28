@@ -14,20 +14,20 @@
  *= require_self
  */
 /* app/assets/stylesheets/application.css */
-@import "bootstrap-sprockets";
+// @import "bootstrap-sprockets";
 @import "bootstrap";
 
 .top-container {
    h1 {
       text-align: center;
-      background-color: #EBEFF3;
+      background-color: #9a7fc6;
    }
 }
 
 .navbar {
    display: flex;
-   justify-content: space-between;
-   align-items: stretch;
+   // justify-content: flex-start;
+   // align-items: normal;
    margin-bottom: 30px;
 }
 
@@ -42,7 +42,7 @@
    }
 
    .th1 {
-      background-color: #8D8F8F;
+      background-color: #498383;
       border: 1px solid #dddddd;
       text-align: center;
       padding: 4px;
@@ -72,7 +72,7 @@
 }
 
  .col-12 {
-    background-color: #EBEFF3;
+    background-color: #327cc5;
     font-weight: bold;
     text-align: center;
     margin-right: 80px;

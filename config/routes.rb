@@ -13,12 +13,7 @@ Rails.application.routes.draw do
       resources :viewing_parties, only: [:new, :create]
   end
 
-  resources :users, only: [:create] do
-    # resources :discover, only: [:index]
-    # resources :movies, only: [:index, :show] do
-    #   resources :viewing_parties, only: [:new, :create]
-    # end
-  end
+  resources :users, only: [:create]
 
   get "/login", to: "users#login_form"
   post "/login", to: "users#login"
