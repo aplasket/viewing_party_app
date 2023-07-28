@@ -14,9 +14,31 @@ Viewing Party Lite is an application in which users can explore movie options an
 
 
 ## Versions
-
 - Ruby 3.2.2
-
 - Rails 7.0.6
 
-Example wireframes to follow are found [here](https://backend.turing.edu/module3/projects/viewing_party_lite/wireframes)
+## Testing
+`bundle exec rspec` will run the entire test suite. All tests are passing at time of writin
+
+The team tested happy paths, sad paths, and edge cases when needed. Error messages were added where applicable.
+
+- To run model tests for this app, type the following command in your terminal:
+    `bundle exec rspec spec/models`
+- To run model tests for this app, type the following command in your terminal:
+    `bundle exec rspec spec/features`
+- This application uses the Simplecov gem to monitor test coverage.
+
+
+## Project Status and Potential Next Steps
+View the project management tracker and any open issues by clicking here.
+
+
+## Wireframes:
+This application is deployed with Render. Here are some pictures of this application:
+<details>
+<summary>`route: "/"`</summary>
+
+```
+CODE!
+```
+</details>
