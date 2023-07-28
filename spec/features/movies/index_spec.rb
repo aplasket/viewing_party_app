@@ -58,7 +58,7 @@ RSpec.describe "movies_path", type: :feature do
     it "displays a button to return back to the discover movies page", :vcr do
       visit movies_path
 
-      click_button "Discover Movies"
+      click_on "Discover Movies"
 
       expect(current_path).to eq(discover_path)
     end

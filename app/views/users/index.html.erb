@@ -1,12 +1,14 @@
+<div class="top-container">
 <h2>Discover Movies</h2>
 
 <%= button_to "Find Top Rated Movies", movies_path, method: :get %>
 
-</br>
-<div class="search-movies">
-  <%= form_with url: movies_path, method: :get, local: true do |f| %>
-    <%= f.label :keyword, "Search:" %>
-    <%= f.text_field :keyword %>
-    <%= f.submit "Find Movies" %>
-  <% end %>
+  </br>
+  <div class="search-movies">
+    <%= form_with url: movies_path, method: :get, local: true do |f| %>
+      <%= f.label :keyword, "Search:" %>
+      <%= f.text_field :keyword %>
+      <%= f.submit "Find Movies" %>
+    <% end %>
+  </div>
 </div>

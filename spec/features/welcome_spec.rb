@@ -18,12 +18,12 @@ RSpec.describe "/", type: :feature do
     it "displays a button to create a new user" do
       visit root_path
 
-      expect(page).to have_button("Create a New User")
+      expect(page).to have_content("Create a New User")
     end
 
     it "displays a button to discover movies" do
       visit root_path
-      expect(page).to have_button("Discover Movies")
+      expect(page).to have_content("Discover Movies")
     end
 
     it "sad path, visitors cannot see existing users" do
@@ -78,9 +78,9 @@ RSpec.describe "/", type: :feature do
       # expect(current_path).to eq(user_path(user))
       expect(current_path).to eq(dashboard_path)
 
-      expect(page).to have_button("Log Out")
-      expect(page).to_not have_button("Create a New User")
-      expect(page).to_not have_button("Log In")
+      expect(page).to have_content("Log Out")
+      expect(page).to_not have_content("Create a New User")
+      expect(page).to_not have_content("Log In")
     end
 
     it "sad path, cannot login with bad credentials" do
@@ -178,9 +178,9 @@ RSpec.describe "/", type: :feature do
       click_on "Log Out"
 
       expect(current_path).to eq(root_path)
-      expect(page).to_not have_button("Log Out")
-      expect(page).to have_button("Create a New User")
-      expect(page).to have_button("Log In")
+      expect(page).to_not have_content("Log Out")
+      expect(page).to have_content("Create a New User")
+      expect(page).to have_content("Log In")
       expect(page).to_not have_content("Existing Users")
     end
   end

@@ -1,8 +1,6 @@
 <div class="users">
 
 <% if current_user %>
-  <%= button_to "Dashboard", dashboard_path, method: :get %>
-
   <h3>Existing Users</h3>
   <% @users.each do |user| %>
     <ul>
