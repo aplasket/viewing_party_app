@@ -59,7 +59,7 @@ RSpec.describe "movie_path(:id)", type: :feature do
 
       visit movie_path(movie.id)
 
-      click_button "Discover Movies"
+      click_on "Discover Movies"
 
       expect(current_path).to eq(discover_path)
     end

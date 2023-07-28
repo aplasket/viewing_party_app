@@ -29,7 +29,7 @@ RSpec.describe "dashboard path", type: :feature do
 
     it "routes me to the discover movies dashboard", :vcr do
       expect(current_path).to eq(dashboard_path)
-      click_button "Discover Movies"
+      click_on "Discover Movies"
       expect(current_path).to eq(discover_path)
     end
 
