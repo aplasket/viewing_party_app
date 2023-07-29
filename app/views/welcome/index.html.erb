@@ -1,7 +1,8 @@
 <div class="users">
-
+<%= image_tag 'tech-daily-PGuCnUzsRSM-unsplash.jpg', title: "movie theatre", class: "photo", size: "700x580"  %>
+</br></br>
 <% if current_user %>
-  <h3>Existing Users</h3>
+  <h2>Existing Users</h2>
   <% @users.each do |user| %>
     <ul>
     <li><%= user.email %></li>
