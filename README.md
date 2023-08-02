@@ -130,9 +130,42 @@ As a logged in user on their dashboard page "/dashboard", the user can see all v
 </details>
 
 ## Built with:
-- movie images supplied by `unsplash.com api`
-- `ruby`
-- `rails`
-- `render`
-- `bootstrap`
-- `SCSS & HTML`
+* [![Ruby][Ruby]][Ruby-url]
+* [![Rails][Rails]][Rails-url]
+* [![PostgreSQL][Postgres]][Postgres-url]
+* [![UnSplash][UnSplash]][UnSplash-url]
+* [![BootStrap][BootStrap]][Bootstrap-url]
+
+## Contributors:
+Base project:
+* Ashley's Github Profile: [![Github][Github]][ashley-gh-url]
+* Matthew's Github Profile: [![Github][Github]][matthew-gh-url]  
+
+Solo Extension: adding styling and refactor
+* Ashley's LinkedIn Profile: [![linkedin][linkedin]][ashley-url]
+* Ashley's Github Profile: [![Github][Github]][ashley-gh-url]
+
+<!-- LICENSE -->
+## License
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[linkedin]: https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
+[ashley-url]: https://www.linkedin.com/in/ashley-plasket/
+[Ruby]: https://img.shields.io/badge/Ruby-CC342D?style=for-the-badge&logo=ruby&logoColor=white
+[Ruby-url]: https://www.ruby-lang.org/en/
+[BootStrap]: https://img.shields.io/badge/Bootstrap-%239400D3?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com/
+[Rails]: https://img.shields.io/badge/Ruby_on_Rails-CC0000?style=for-the-badge&logo=ruby-on-rails&logoColor=white
+[Rails-url]: https://rubyonrails.org/
+[Postgres]: https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white
+[Postgres-url]: https://www.postgresql.org/
+[UnSplash]: https://img.shields.io/badge/Unsplash-C0C0C0?style=for-the-badge&logo=unsplash&logoColor=white
+[UnSplash-url]: https://unsplash.com/
+[Render]: https://img.shields.io/badge/Render-1E90FF?style=for-the-badge&logo=render&logoColor=white
+[Render-url]: https://render.com/
+[Github]: https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
+[ashley-gh-url]: https://github.com/aplasket
+[matthew-gh-url]: https://github.com/MWMJohnson
