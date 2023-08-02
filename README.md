@@ -128,3 +128,11 @@ As a logged in user on their dashboard page "/dashboard", the user can see all v
 ![users dashboard](<app/assets/images/taylors dashboard.png>)
 
 </details>
+
+## Built with:
+- movie images supplied by `unsplash.com api`
+- `ruby`
+- `rails`
+- `render`
+- `bootstrap`
+- `SCSS & HTML`
