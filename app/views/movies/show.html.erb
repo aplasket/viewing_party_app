@@ -1,12 +1,13 @@
 <h3 class="title"><%= @facade.movie.title %></h3>
+</br>
 
 <%= button_to "Create Viewing Party for #{@facade.movie.title}",
   new_movie_viewing_party_path(@facade.movie.id),
-  method: :get %>
+  method: :get %></br>
 
-<h5 class="vote_avg">Vote: <%= @facade.movie.vote_average %></h5>
-<h5 class="runtime">Runtime: <%= format_runtime(@facade.movie.runtime) %></h5>
-<h5 class="genre">Genre: <% @facade.movie.genres.each do |genre| %>
+<h5 class="vote_avg">Vote: <%= @facade.movie.vote_average %></h5></br>
+<h5 class="runtime">Runtime: <%= format_runtime(@facade.movie.runtime) %></h5></br>
+<h5 class="genre">Genre: <% @facade.movie.genres.each do |genre| %></br>
     <ul><li><%= genre[:name]%></li></ul>
   <% end %>
 </h5>
