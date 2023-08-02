@@ -103,7 +103,7 @@ As a visitor or a logged in user, after navigating to the /discover page, the us
 
 As a visitor or a logged in user, after navigating to /movies or /movies?query, the user can click a link to that movies show page. They are then routed to "/movies/#{:movie_id}" path where the user can see details about that movie, including: title of the movie, that movies vote rating by users, runtime, genre categories, summary, top 10 cast members, and reviews left by users. The user also sees a button at the top of the page to "Create a Viewing Party for #{movie_title}".
 
-![Movie show page for SpiderMan: Across the SpiderVerse](<app/assets/images/ spiderman discover results.png>)
+![Movie show page for SpiderMan: Across the SpiderVerse](<app/assets/images/spiderman show page.png>)
 
 </details>
 
@@ -139,7 +139,7 @@ As a logged in user on their dashboard page "/dashboard", the user can see all v
 ## Contributors:
 Base project:
 * Ashley's Github Profile: [![Github][Github]][ashley-gh-url]
-* Matthew's Github Profile: [![Github][Github]][matthew-gh-url]  
+* Matthew's Github Profile: [![Github][Github]][matthew-gh-url]
 
 Solo Extension: adding styling and refactor
 * Ashley's LinkedIn Profile: [![linkedin][linkedin]][ashley-url]
